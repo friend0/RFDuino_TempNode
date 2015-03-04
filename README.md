@@ -14,9 +14,9 @@ This module will allow for the following:
 
 ##References
 
-#### Extra Extensions
+#### Links
 
-* `abbr` -- [Abbreviations][]
+* [RFDuino DS18B20][]
 * `attr_list` -- [Attribute Lists][]
 * `def_list` -- [Definition Lists][]
 * `fenced_code` -- [Fenced Code Blocks][]
@@ -24,7 +24,7 @@ This module will allow for the following:
 * `tables` -- [Tables][]
 * `smart_strong` -- [Smart Strong][]
 
-[Abbreviations]: http://pythonhosted.org/Markdown/extensions/abbreviations.html
+[RFDuino DS18B20]: http://forum.rfduino.com/index.php?topic=103.0
 [Attribute Lists]: http://pythonhosted.org/Markdown/extensions/attr_list.html
 [Definition Lists]: http://pythonhosted.org/Markdown/extensions/definition_lists.html
 [Fenced Code Blocks]: http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html
