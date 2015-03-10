@@ -1,5 +1,11 @@
-#include <OneWire.h>
 #include <RFduinoBLE.h>
+#include <OneWire.h>
+#include "libUBP.h"
+#include "constants.h"
+#include "data_types.h"
+
+#include <Arduino.h>
+#include "crc8.h"
 
 // OneWire DS18S20, DS18B20, DS1822 Temperature Example
 //
@@ -11,15 +17,11 @@
 OneWire  ds(2);  // on pin 10 (a 4.7K resistor is necessary)
 
 void setup(void) {
-   Serial.begin(9600);
-    RFduinoBLE.advertisementData = "temp";
-
-  // start the BLE stack
-  RFduinoBLE.begin();
+   setupRFDuino();
 }
 
 void loop(void) {
-  Serial.println("dick");
+  MeasurementType aMeasurement;
   byte i;
   byte present = 0;
   byte type_s;
@@ -110,6 +112,28 @@ void loop(void) {
   }
   celsius = (float)raw / 16.0;
   fahrenheit = celsius * 1.8 + 32.0;
+  
+  aMeasurement.A = celsius;
+  aMeasurement.B = 4.321;
+  aMeasurement.C = 2.02;
+  aMeasurement.D = 2.02;
+  aMeasurement.E = 2.02;
+  aMeasurement.F = 2.02;
+  aMeasurement.G = 2.02;
+  aMeasurement.H = 2.02;
+  aMeasurement.Z = 2.02;
+  aMeasurement.J = 2.02;
+  aMeasurement.K = 2.02;
+  aMeasurement.L = 54.321;
+  bool success = UBP_queuePacketTransmission(MEASUREMENT_v1, UBP_TxFlagNone, (char *) &aMeasurement, sizeof(MeasurementType));
+  if (success) Serial.println("Packet queued successfully");
+  else Serial.println("Failed to enqueue packet");
+  
+  // put your main code here, to run repeatedly:
+  while (UBP_isBusy() == true) UBP_pump();
+  
+  RFduino_ULPDelay( SECONDS(1) );
+  
   /*
   Serial.print("  Temperature = ");
   Serial.print(celsius);
@@ -119,3 +143,38 @@ void loop(void) {
   */
     RFduinoBLE.sendFloat(celsius);
 }
+
+void setupRFDuino() {
+  Serial.begin(9600);
+  RFduinoBLE.deviceName = "RFduino";
+  RFduinoBLE.advertisementData = "temp";
+  RFduinoBLE.advertisementInterval = MILLISECONDS(300);
+  RFduinoBLE.txPowerLevel = 0;  // (-20dbM to +4 dBm)
+
+  // Start the BLE stack
+  RFduinoBLE.begin();
+  
+}
+
+void UBP_receivedPacket(unsigned short packetIdentifier, UBP_TxFlags txFlags, void *packetBuffer) {
+  
+  switch (packetIdentifier) {
+    
+    case MEASUREMENT_v1: {                    
+      break;
+    }
+  }
+}
+
+void RFduinoBLE_onReceive(char *data, int len)
+{
+  Serial.println("FUCK!!");
+  // if the first byte is 0x01 / on / true
+  if (data[0])
+  ;
+    //digitalWrite(led, HIGH);
+  else
+  ;
+    //digitalWrite(led, LOW);
+}
+
