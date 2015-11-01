@@ -1,28 +1,28 @@
-# RFDuino Temperature Sensor Node
-enable_mathjax = true
+# RFDuino IMU Node
+
 ##Background
-This repository leverages the RFDuino repository to interface with the DS18B20 temperature sensor using the 1-wire interface.
+This project utilizes one of either the LSM9DS0 or MPU6050 IMUs to stream data to an iOS app via BLE. 
 
 This module will allow for the following:
-- Interpret temperature readings from the device
-- Transmit data to iOS/Android devices using BLE
-- Throw events
+- Read Accelerometer, Gyroscope and Magenetometer data from the IMU
+- Detect when new data is available
+- Transmit SLIP buffer packets to iOS app
 
 
 
 ##Implementation
+todo: some notes on implementation
+
+
+## Lab Exercises:
 
 ##References
 
 #### Links
-
+todo: update links
 * [RFDuino DS18B20][]
 * `attr_list` -- [Attribute Lists][]
-* `def_list` -- [Definition Lists][]
-* `fenced_code` -- [Fenced Code Blocks][]
-* `footnotes` -- [Footnotes][]
-* `tables` -- [Tables][]
-* `smart_strong` -- [Smart Strong][]
+
 
 [RFDuino DS18B20]: http://forum.rfduino.com/index.php?topic=103.0
 [Attribute Lists]: http://pythonhosted.org/Markdown/extensions/attr_list.html
